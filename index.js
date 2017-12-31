@@ -1,7 +1,11 @@
-const ARC_RADIUS = 10;
+const ARC_RADIUS = 5;
 let mouseDown;
 let canvasElement;
 let canvasContext;
+let previousX;
+let previousY;
+let currentX;
+let currentY;
 function main()
 {
     canvasElement = document.getElementById("CanvasPainter");
@@ -16,25 +20,36 @@ function main()
     canvasElement.onmousedown = (event) =>
     {
         mouseDown = true;
-        Draw();
+        previousX = event.x;
+        previousY = event.y;
+        Draw(event);
     }
     canvasElement.onmousemove = (event) =>
     {
+        currentX = event.x;
+        currentY = event.y;
         if (mouseDown)
         {
-            Draw();
+            Draw(event);
         }    
     }
     canvasElement.onmouseup = (event) =>
     {
         mouseDown = false;
-        Draw();
+        Draw(event);
     }
 }
-function Draw()
+function Draw(event)
 {
     canvasContext.beginPath();
     canvasContext.arc(event.x, event.y, ARC_RADIUS, 0, Math.PI * 2);
     canvasContext.fill();
+    canvasContext.beginPath();
+    canvasContext.lineWidth = ARC_RADIUS*2;
+    canvasContext.moveTo(previousX,previousY);
+    canvasContext.lineTo(currentX,currentY);
+    canvasContext.stroke();
+    previousX = event.x;
+    previousY = event.y;
 }
 main();
