@@ -38,6 +38,9 @@ function main()
         mouseDown = false;
         Draw(event);
     }
+    canvasElement.oncontextmenu = (event) => {
+        event.preventDefault();
+    }
 }
 function Draw(event)
 {
