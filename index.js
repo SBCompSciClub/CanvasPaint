@@ -13,6 +13,13 @@ function main()
     canvasElement.width = parseInt(canvasElementStyle.width);
     canvasElement.height = parseInt(canvasElementStyle.height);
     canvasContext = canvasElement.getContext("2d");
+    
+    window.onresize = (event) =>
+    {
+        canvasElement.width = parseInt(canvasElementStyle.width);
+        canvasElement.height = parseInt(canvasElementStyle.height);
+    }
+    
     if (!canvasContext)
     {
         alert("Error: Couldn't create canvasContext");
@@ -55,4 +62,5 @@ function Draw(event)
     previousX = event.x;
     previousY = event.y;
 }
+
 main();
